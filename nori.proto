@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "plugin/messages.proto";
+
+package protoNori;
+
+service Nori {
+    //plugin
+    rpc PluginGetCommand (PluginGetRequest) returns (ErrorReply) {}
+    rpc PluginInstallCommand (PluginInstallRequest) returns (ErrorReply) {}
+    rpc PluginInterfaceCommand(PluginInterfaceRequest) returns (PluginListReply){}
+    rpc PluginListCommand (PluginListRequest) returns (PluginListReply) {}
+    rpc PluginMetaCommand (PluginMetaRequest) returns (PluginMetaReply) {}
+    rpc PluginPullCommand (PluginPullRequest) returns (ErrorReply) {}
+    rpc PluginRemoveCommand (PluginRemoveRequest) returns (ErrorReply) {}
+    rpc PluginStartCommand (PluginStartRequest)returns (ErrorReply){}
+    rpc PluginStopCommand (PluginStopRequest)returns (ErrorReply){}
+    rpc PluginUninstallCommand (PluginUninstallRequest) returns (ErrorReply) {}
+    rpc PluginUploadCommand (PluginUploadRequest) returns (ErrorReply) {}
+
+    //config
+}
+
