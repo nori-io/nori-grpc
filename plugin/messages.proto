@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package protoNori;
+
+import "messagesMetaInformation.proto";
+
+// cmd: plugin get
+message PluginGetRequest {
+    ID Id=1;
+    bool FlagVerbose=3;
+}
+
+message PluginPullRequest {
+    ID Id=1;
+    bool FlagDeps=2;
+}
+
+message ErrorReply {
+    bool Status = 1;
+    string Error = 2;
+}
+
+// cmd: plugin install
+message PluginInstallRequest {
+    ID Id=1;
+    bool FlagVerbose=2;
+    bool FlagDeps=3;
+    bool FlagAll=4;
+}
+
+message PluginInterfaceRequest{
+    string InterfaceName=1;
+}
+
+// cmd: plugin list
+message PluginListRequest{
+    bool FlagAll=1;
+    bool FlagError=2;
+    bool FlagInstalled = 3;
+    bool FlagRunning = 4;
+    bool FlagInstallable=5;
+    bool FlagInactive=6;
+}
+
+message PluginListWithStatus {
+    ID metaID = 1;
+    Author Author = 2;
+    Dependencies DependenciesArray = 3;
+    Description Description = 4;
+    Core Core = 5;
+    Interface Interface = 6;
+    License License = 7;
+    Links Links = 8;
+    Repository Repository = 9;
+    repeated string Tags = 10;
+    bool FlagAll=11;
+    bool FlagError=12;
+    bool FlagInstalled = 13;
+    bool FlagRunning = 14;
+    bool FlagInstallable=15;
+    bool FlagInactive=16;
+}
+
+message PluginListWithoutStatus{
+    ID metaID = 1;
+    Author Author = 2;
+    Dependencies DependenciesArray = 3;
+    Description Description = 4;
+    Core Core = 5;
+    Interface Interface = 6;
+    License License = 7;
+    Links Links = 8;
+    Repository Repository = 9;
+    repeated string Tags = 10;
+}
+
+message PluginListReply{
+    repeated PluginListWithStatus Data = 1;
+    ErrorReply ErrorPlugin = 2;
+}
+
+// cmd: plugin remove
+message PluginRemoveRequest {
+    ID Id=1;
+}
+
+message PluginStartRequest{
+    ID Id=1;
+    bool FlagAll=2;
+}
+
+message PluginStopRequest{
+    ID Id=1;
+    bool FlagAll=2;
+}
+
+// cmd: plugin uninstall
+message PluginUninstallRequest {
+    ID Id=1;
+    bool FlagAll=2;
+    bool FlagDependent=3;
+}
+
+// cmd: plugin upload
+message PluginUploadRequest {
+    string Filepath = 1;
+}
+
+// cmd: plugin meta
+message PluginMetaRequest {
+    PluginID ID = 1;
+    bool FlagDeps = 2;
+    bool FlagDepsStatus=3;
+    bool FlagDependent = 4;
+    bool FlagDependentStatus=5;
+}
+
+message PluginMetaReply {
+    repeated PluginListWithoutStatus arrayPluginListWithoutStatus=1;
+}
