@@ -3,6 +3,7 @@ syntax = "proto3";
 package protoNori;
 
 import "messagesMetaInformation.proto";
+import "../common/common.proto";
 
 // cmd: plugin get
 message PluginGetRequest {
@@ -15,10 +16,6 @@ message PluginPullRequest {
     bool FlagDeps=2;
 }
 
-message ErrorReply {
-    bool Status = 1;
-    string Error = 2;
-}
 
 // cmd: plugin install
 message PluginInstallRequest {
