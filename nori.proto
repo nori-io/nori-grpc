@@ -7,7 +7,7 @@ import "config_messages/config_messages.proto";
 package proto_nori;
 
 service Nori {
-    
+
     //plugin
     rpc PluginGetCommand (plugin_messages.PluginGetRequest) returns (common_messages.ErrorReply) {}
     rpc PluginInstallCommand (plugin_messages.PluginInstallRequest) returns (common_messages.ErrorReply) {}
