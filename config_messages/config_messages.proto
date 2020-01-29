@@ -15,7 +15,8 @@ message ConfigGetReply{
 //config set
 message ConfigSetRequest{
     common_messages.ID Id=1;
-    KeyValue KeyValueMapField=2;
+    string Key=2;
+    string Value=3;
 }
 message ConfigSetReply{
     ErrorReply ErrorConfig=1;
