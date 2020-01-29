@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package protoNori;
+package common_messages;
 
 message ID {
     string Id = 1;

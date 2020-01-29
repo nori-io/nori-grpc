@@ -1,25 +1,24 @@
 syntax = "proto3";
 
-package protoNori;
+package plugin;
 
-import "messagesMetaInformation.proto";
-import "../common/common.proto";
+import "messages_meta_information.proto";
+import "../common_messages/common_messages.proto";
 
 // cmd: plugin get
 message PluginGetRequest {
-    ID Id=1;
+    common_messages.ID Id=1;
     bool FlagVerbose=3;
 }
 
 message PluginPullRequest {
-    ID Id=1;
+    common_messages.ID Id=1;
     bool FlagDeps=2;
 }
 
-
 // cmd: plugin install
 message PluginInstallRequest {
-    ID Id=1;
+    common_messages.ID Id=1;
     bool FlagVerbose=2;
     bool FlagDeps=3;
     bool FlagAll=4;
@@ -40,7 +39,7 @@ message PluginListRequest{
 }
 
 message PluginListWithStatus {
-    ID metaID = 1;
+    common_messages.ID metaID = 1;
     Author Author = 2;
     Dependencies DependenciesArray = 3;
     Description Description = 4;
@@ -59,7 +58,7 @@ message PluginListWithStatus {
 }
 
 message PluginListWithoutStatus{
-    ID metaID = 1;
+    common_messages.ID metaID = 1;
     Author Author = 2;
     Dependencies DependenciesArray = 3;
     Description Description = 4;
@@ -73,27 +72,27 @@ message PluginListWithoutStatus{
 
 message PluginListReply{
     repeated PluginListWithStatus Data = 1;
-    ErrorReply ErrorPlugin = 2;
+    common_messages.ErrorReply ErrorPlugin = 2;
 }
 
 // cmd: plugin remove
 message PluginRemoveRequest {
-    ID Id=1;
+    common_messages.ID Id=1;
 }
 
 message PluginStartRequest{
-    ID Id=1;
+    common_messages.ID Id=1;
     bool FlagAll=2;
 }
 
 message PluginStopRequest{
-    ID Id=1;
+    common_messages.ID Id=1;
     bool FlagAll=2;
 }
 
 // cmd: plugin uninstall
 message PluginUninstallRequest {
-    ID Id=1;
+    common_messages.ID Id=1;
     bool FlagAll=2;
     bool FlagDependent=3;
 }

@@ -8,17 +8,17 @@ package protoNori;
 
 service Nori {
     //plugin
-    rpc PluginGetCommand (PluginGetRequest) returns (ErrorReply) {}
-    rpc PluginInstallCommand (PluginInstallRequest) returns (ErrorReply) {}
-    rpc PluginInterfaceCommand(PluginInterfaceRequest) returns (PluginListReply){}
-    rpc PluginListCommand (PluginListRequest) returns (PluginListReply) {}
-    rpc PluginMetaCommand (PluginMetaRequest) returns (PluginMetaReply) {}
-    rpc PluginPullCommand (PluginPullRequest) returns (ErrorReply) {}
-    rpc PluginRemoveCommand (PluginRemoveRequest) returns (ErrorReply) {}
-    rpc PluginStartCommand (PluginStartRequest)returns (ErrorReply){}
-    rpc PluginStopCommand (PluginStopRequest)returns (ErrorReply){}
-    rpc PluginUninstallCommand (PluginUninstallRequest) returns (ErrorReply) {}
-    rpc PluginUploadCommand (PluginUploadRequest) returns (ErrorReply) {}
+    rpc PluginGetCommand (plugin.PluginGetRequest) returns (ErrorReply) {}
+    rpc PluginInstallCommand (plugin.PluginInstallRequest) returns (ErrorReply) {}
+    rpc PluginInterfaceCommand(plugin.PluginInterfaceRequest) returns (plugin.PluginListReply){}
+    rpc PluginListCommand (plugin.PluginListRequest) returns (plugin.PluginListReply) {}
+    rpc PluginMetaCommand (plugin.PluginMetaRequest) returns (plugin.PluginMetaReply) {}
+    rpc PluginPullCommand (plugin.PluginPullRequest) returns (ErrorReply) {}
+    rpc PluginRemoveCommand (plugin.PluginRemoveRequest) returns (ErrorReply) {}
+    rpc PluginStartCommand (plugin.PluginStartRequest)returns (ErrorReply){}
+    rpc PluginStopCommand (plugin.PluginStopRequest)returns (ErrorReply){}
+    rpc PluginUninstallCommand (plugin.PluginUninstallRequest) returns (ErrorReply) {}
+    rpc PluginUploadCommand (plugin.PluginUploadRequest) returns (ErrorReply) {}
 
     //config
     rpc ConfigGetCommand(ConfigGetRequest)returns (ConfigGetReply){}
