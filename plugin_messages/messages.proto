@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package plugin;
+package plugin_messages;
 
 import "messages_meta_information.proto";
 import "../common_messages/common_messages.proto";

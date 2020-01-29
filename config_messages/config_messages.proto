@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package protoNori;
+package config_messages;
 import "../common_messages/common_messages.proto";
 
 //config get

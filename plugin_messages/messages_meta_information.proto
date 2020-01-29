@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package plugin;
+package plugin_messages;
 
 message Author {
     string Name = 1;

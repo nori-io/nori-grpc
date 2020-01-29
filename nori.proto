@@ -1,28 +1,29 @@
 syntax = "proto3";
 
-import "plugin/messages.proto";
-import "config/config.proto";
+import "plugin_messages/messages.proto";
+import "config_messages/config_messages.proto";
 
 
-package protoNori;
+package proto_nori;
 
 service Nori {
+    
     //plugin
-    rpc PluginGetCommand (plugin.PluginGetRequest) returns (ErrorReply) {}
-    rpc PluginInstallCommand (plugin.PluginInstallRequest) returns (ErrorReply) {}
-    rpc PluginInterfaceCommand(plugin.PluginInterfaceRequest) returns (plugin.PluginListReply){}
-    rpc PluginListCommand (plugin.PluginListRequest) returns (plugin.PluginListReply) {}
-    rpc PluginMetaCommand (plugin.PluginMetaRequest) returns (plugin.PluginMetaReply) {}
-    rpc PluginPullCommand (plugin.PluginPullRequest) returns (ErrorReply) {}
-    rpc PluginRemoveCommand (plugin.PluginRemoveRequest) returns (ErrorReply) {}
-    rpc PluginStartCommand (plugin.PluginStartRequest)returns (ErrorReply){}
-    rpc PluginStopCommand (plugin.PluginStopRequest)returns (ErrorReply){}
-    rpc PluginUninstallCommand (plugin.PluginUninstallRequest) returns (ErrorReply) {}
-    rpc PluginUploadCommand (plugin.PluginUploadRequest) returns (ErrorReply) {}
+    rpc PluginGetCommand (plugin_messages.PluginGetRequest) returns (common_messages.ErrorReply) {}
+    rpc PluginInstallCommand (plugin_messages.PluginInstallRequest) returns (common_messages.ErrorReply) {}
+    rpc PluginInterfaceCommand(plugin_messages.PluginInterfaceRequest) returns (plugin_messages.PluginListReply){}
+    rpc PluginListCommand (plugin_messages.PluginListRequest) returns (plugin_messages.PluginListReply) {}
+    rpc PluginMetaCommand (plugin_messages.PluginMetaRequest) returns (plugin_messages.PluginMetaReply) {}
+    rpc PluginPullCommand (plugin_messages.PluginPullRequest) returns (common_messages.ErrorReply) {}
+    rpc PluginRemoveCommand (plugin_messages.PluginRemoveRequest) returns (common_messages.ErrorReply) {}
+    rpc PluginStartCommand (plugin_messages.PluginStartRequest)returns (common_messages.ErrorReply){}
+    rpc PluginStopCommand (plugin_messages.PluginStopRequest)returns (common_messages.ErrorReply){}
+    rpc PluginUninstallCommand (plugin_messages.PluginUninstallRequest) returns (common_messages.ErrorReply) {}
+    rpc PluginUploadCommand (plugin_messages.PluginUploadRequest) returns (common_messages.ErrorReply) {}
 
     //config
-    rpc ConfigGetCommand(ConfigGetRequest)returns (ConfigGetReply){}
-    rpc ConfigSetCommand(ConfigSetRequest) returns(ConfigSetReply){}
-    rpc ConfigUploadCommand(ConfigUploadRequest) returns(ConfigUploadReply){}
+    rpc ConfigGetCommand(config_messages.ConfigGetRequest)returns (config_messages.ConfigGetReply){}
+    rpc ConfigSetCommand(config_messages.ConfigSetRequest) returns(config_messages.ConfigSetReply){}
+    rpc ConfigUploadCommand(config_messages.ConfigUploadRequest) returns(config_messages.ConfigUploadReply){}
 }
 
