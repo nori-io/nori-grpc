@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package config_messages;
-import "common_messages/common_messages.proto";
+package config;
+import "common/common.proto";
 
 //config get
 message ConfigGetRequest{
-    common_messages.ID Id=1;
+    common.ID Id=1;
 }
 
 message ConfigGetReply{
@@ -14,7 +14,7 @@ message ConfigGetReply{
 
 //config set
 message ConfigSetRequest{
-    common_messages.ID Id=1;
+    common.ID Id=1;
     string Key=2;
     string Value=3;
 }
