@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package plugin;
 
-import "plugin_meta_information.proto";
 import "common/common.proto";
+import "plugin_meta_information.proto";
 
 // cmd: plugin get
 message PluginGetRequest {

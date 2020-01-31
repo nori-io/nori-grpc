@@ -1,12 +1,10 @@
 syntax = "proto3";
 
-import "plugin/plugin.proto";
-import "config/config.proto";
-import "common/common.proto";
-
-
-
 package proto_nori;
+
+import "common/common.proto";
+import "config/config.proto";
+import "plugin/plugin.proto";
 
 service Nori {
 

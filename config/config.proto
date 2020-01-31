@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package config;
+
 import "common/common.proto";
 
 //config get
