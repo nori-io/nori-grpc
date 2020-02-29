@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package config;
+
+import "common/common.proto";
+
+//config get
+message ConfigGetRequest{
+    common.ID Id=1;
+}
+
+message ConfigGetReply{
+    KeyValue KeyValueMapField=1;
+}
+
+//config set
+message ConfigSetRequest{
+    common.ID Id=1;
+    string Key=2;
+    string Value=3;
+}
+message ConfigSetReply{
+    ErrorReply ErrorConfig=1;
+}
+
+//config upload
+message ConfigUploadRequest{
+    string Path=1;
+}
+
+message ConfigUploadReply{
+    KeyValue KeyValueMapField=1;
+}
+
+message KeyValue {
+    map<string, string> KeyValueMap  = 1;
+}
+
+message ErrorReply {
+    bool Status = 1;
+    string Error = 2;
+}

@@ -1,11 +1,6 @@
 syntax = "proto3";
 
-package protoNori;
-
-message ID {
-    string Id = 1;
-    string Version=2;
-}
+package plugin;
 
 message Author {
     string Name = 1;
