@@ -8,7 +8,7 @@ import "plugin_meta_information.proto";
 // cmd: plugin get
 message PluginGetRequest {
     common.ID Id=1;
-    bool FlagVerbose=3;
+    bool FlagVerbose=2;
 }
 
 message PluginPullRequest {
