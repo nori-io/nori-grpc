@@ -36,8 +36,3 @@ message ConfigUploadReply{
 message KeyValue {
     map<string, string> KeyValueMap  = 1;
 }
-
-message ErrorReply {
-    bool Status = 1;
-    string Error = 2;
-}

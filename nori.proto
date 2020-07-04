@@ -3,6 +3,7 @@ syntax = "proto3";
 package proto;
 option go_package = "pkg/proto";
 
+import "common.proto";
 import "config.proto";
 import "plugin.proto";
 
