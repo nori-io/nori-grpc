@@ -1,24 +1,25 @@
 syntax = "proto3";
 
-package plugin;
+package proto;
+option go_package = "pkg/proto";
 
 import "common.proto";
 import "plugin_meta_information.proto";
 
 // cmd: plugin get
 message PluginGetRequest {
-    common.ID Id=1;
+    ID Id=1;
     bool FlagVerbose=2;
 }
 
 message PluginPullRequest {
-    common.ID Id=1;
+    ID Id=1;
     bool FlagDeps=2;
 }
 
 // cmd: plugin install
 message PluginInstallRequest {
-    common.ID Id=1;
+    ID Id=1;
     bool FlagVerbose=2;
     bool FlagDeps=3;
     bool FlagAll=4;
@@ -39,7 +40,7 @@ message PluginListRequest{
 }
 
 message PluginListWithStatus {
-    common.ID metaID = 1;
+    ID metaID = 1;
     Author Author = 2;
     Dependencies DependenciesArray = 3;
     Description Description = 4;
@@ -58,7 +59,7 @@ message PluginListWithStatus {
 }
 
 message PluginListWithoutStatus{
-    common.ID metaID = 1;
+    ID metaID = 1;
     Author Author = 2;
     Dependencies DependenciesArray = 3;
     Description Description = 4;
@@ -72,27 +73,27 @@ message PluginListWithoutStatus{
 
 message PluginListReply{
     repeated PluginListWithStatus Data = 1;
-    common.ErrorReply ErrorPlugin = 2;
+    ErrorReply ErrorPlugin = 2;
 }
 
 // cmd: plugin remove
 message PluginRemoveRequest {
-    common.ID Id=1;
+    ID Id=1;
 }
 
 message PluginStartRequest{
-    common.ID Id=1;
+    ID Id=1;
     bool FlagAll=2;
 }
 
 message PluginStopRequest{
-    common.ID Id=1;
+    ID Id=1;
     bool FlagAll=2;
 }
 
 // cmd: plugin uninstall
 message PluginUninstallRequest {
-    common.ID Id=1;
+    ID Id=1;
     bool FlagAll=2;
     bool FlagDependent=3;
 }

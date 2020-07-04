@@ -1,6 +1,7 @@
 syntax = "proto3";
 
-package common;
+package proto;
+option go_package = "pkg/proto";
 
 message ID {
     string Id = 1;
