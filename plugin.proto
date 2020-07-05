@@ -45,7 +45,7 @@ message PluginListWithStatus {
     repeated Dependency dependencies = 3;
     Description description = 4;
     Core core = 5;
-    Interface interface = 6;
+    string interface = 6;
     License license = 7;
     Links links = 8;
     Repository repository = 9;
@@ -64,7 +64,7 @@ message PluginListWithoutStatus{
     repeated Dependency dependencies = 3;
     Description description = 4;
     Core core = 5;
-    Interface interface = 6;
+    string interface = 6;
     License license = 7;
     Links links = 8;
     Repository repository = 9;

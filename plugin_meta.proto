@@ -12,10 +12,6 @@ message Dependencies {
     repeated Dependency metaDependency = 1;
 }
 
-message Interface {
-    string Interface = 1;
-}
-
 message PluginID {
     string MetaId = 1;
 }
