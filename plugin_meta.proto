@@ -21,9 +21,8 @@ message PluginID {
 }
 
 message Dependency {
-    PluginID ID = 1;
-    string Constraint = 2;
-    Interface Interface = 3;
+    string Constraint = 1;
+    Interface Interface = 2;
 }
 
 message Description {
