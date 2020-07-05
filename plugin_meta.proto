@@ -46,10 +46,6 @@ message Link {
     string URL = 2;
 }
 
-message Links {
-    repeated Link Link = 1;
-}
-
 message Repository {
     string Type = 1;
     string URI = 2;
