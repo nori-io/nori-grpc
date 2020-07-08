@@ -6,96 +6,103 @@ option go_package = "pkg/proto";
 import "common.proto";
 import "plugin_meta.proto";
 
-// cmd: plugin get
-message PluginGetRequest {
-    ID id=1;
-    bool flagVerbose=2;
+message Plugin {
+    Meta meta=1;
+    PluginRunningStatus plugin_running_status=2;
+    PluginInstallableStatus plugin_installable_status=3;
+    PluginActiveStatus plugin_active_status=4;
 }
 
-message PluginPullRequest {
-    ID id=1;
-    bool flagDeps=2;
+enum PluginRunningStatus{
+    Stopped=0;
+    Inited=1;
+    Running=2;
+    WithError=3;
+}
+
+enum PluginInstallableStatus{
+    NonInstallable=0;
+    Installable=1;
+}
+
+enum PluginActiveStatus {
+    InActive=0;
+    Active=1;
+}
+
+
+// cmd: plugin get
+message PluginGetRequest {
+    Id id=1;
+    bool flag_verbose=2;
 }
 
 // cmd: plugin install
 message PluginInstallRequest {
-    ID id=1;
-    bool flagVerbose=2;
-    bool flagDeps=3;
-    bool flagAll=4;
+    Id id=1;
+    bool flag_verbose=2;
+    bool flag_deps=3;
+    bool flag_all=4;
 }
-
+//cmd plugin interface
 message PluginInterfaceRequest{
-    string interfaceName=1;
+    string interface_name=1;
 }
 
 // cmd: plugin list
 message PluginListRequest{
-    bool flagAll=1;
-    bool flagError=2;
-    bool flagInstalled = 3;
-    bool flagRunning = 4;
-    bool flagInstallable=5;
-    bool flagInactive=6;
+    bool flag_all=1;
+    bool flag_error=2;
+    bool flag_installed = 3;
+    bool flag_running = 4;
+    bool flag_installable=5;
+    bool flag_inactive=6;
 }
-
-message PluginListWithStatus {
-    ID id = 1;
-    Author author = 2;
-    repeated Dependency dependencies = 3;
-    Description description = 4;
-    Core core = 5;
-    string interface = 6;
-    License license = 7;
-    repeated Link links = 8;
-    Repository repository = 9;
-    repeated string tags = 10;
-    bool flagAll=11;
-    bool flagError=12;
-    bool flagInstalled = 13;
-    bool flagRunning = 14;
-    bool flagInstallable=15;
-    bool flagInactive=16;
-}
-
-message PluginListWithoutStatus{
-    ID id = 1;
-    Author author = 2;
-    repeated Dependency dependencies = 3;
-    Description description = 4;
-    Core core = 5;
-    string interface = 6;
-    License license = 7;
-    repeated Link links = 8;
-    Repository repository = 9;
-    repeated string tags = 10;
-}
-
+// response for plugin list and plugin interface
 message PluginListReply{
-    repeated PluginListWithStatus data = 1;
-    ErrorReply errorPlugin = 2;
+    repeated Plugin plugin = 1;
+    Error error = 2;
+}
+
+// cmd: plugin meta
+message PluginMetaRequest {
+    Id id = 1;
+    bool flag_deps = 2;
+    bool flag_deps_status=3;
+    bool flag_dependent = 4;
+    bool flag_dependent_status=5;
+}
+
+message PluginMetaReply {
+    repeated Meta meta=1;
+}
+
+//cmd: plugin pull
+message PluginPullRequest {
+    Id id=1;
+    bool flag_deps=2;
 }
 
 // cmd: plugin remove
 message PluginRemoveRequest {
-    ID id=1;
+    Id id=1;
 }
 
 message PluginStartRequest{
-    ID id=1;
-    bool flagAll=2;
+    Id id=1;
+    bool flag_all=2;
 }
 
 message PluginStopRequest{
-    ID id=1;
-    bool flagAll=2;
+    Id id=1;
+    bool flag_all=2;
 }
 
 // cmd: plugin uninstall
 message PluginUninstallRequest {
-    ID id=1;
-    bool flagAll=2;
-    bool flagDependent=3;
+    Id id=1;
+    bool flag_all=2;
+    bool flag_dependent=3;
 }
 
 // cmd: plugin upload
@@ -103,15 +110,3 @@ message PluginUploadRequest {
     string filepath = 1;
 }
 
-// cmd: plugin meta
-message PluginMetaRequest {
-    PluginID id = 1;
-    bool flagDeps = 2;
-    bool flagDepsStatus=3;
-    bool flagDependent = 4;
-    bool flagDependentStatus=5;
-}
-
-message PluginMetaReply {
-    repeated PluginListWithoutStatus data=1;
-}

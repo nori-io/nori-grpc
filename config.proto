@@ -7,32 +7,29 @@ import "common.proto";
 
 //config get
 message ConfigGetRequest{
-    ID Id=1;
+    Id id=1;
 }
 
 message ConfigGetReply{
-    KeyValue KeyValueMapField=1;
+    map<string, string> key_value_map=1;
 }
 
 //config set
 message ConfigSetRequest{
-    ID Id=1;
-    string Key=2;
-    string Value=3;
+    Id id=1;
+    string key=2;
+    string value=3;
 }
 message ConfigSetReply{
-    ErrorReply ErrorConfig=1;
+    Error error=1;
 }
 
 //config upload
 message ConfigUploadRequest{
-    string Path=1;
+    string path=1;
 }
 
 message ConfigUploadReply{
-    KeyValue KeyValueMapField=1;
+    map<string, string> key_value_map=1;
 }
 
-message KeyValue {
-    map<string, string> KeyValueMap  = 1;
-}
