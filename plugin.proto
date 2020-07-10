@@ -4,59 +4,59 @@ package proto;
 option go_package = "pkg/proto";
 
 import "common.proto";
-import "plugin_meta.proto";
+import "meta.proto";
 
 message Plugin {
-    Meta meta=1;
-    PluginRunningStatus plugin_running_status=2;
-    PluginInstallableStatus plugin_installable_status=3;
-    PluginActiveStatus plugin_active_status=4;
+    Meta meta = 1;
+    PluginRunningStatus plugin_running_status = 2;
+    PluginInstallableStatus plugin_installable_status = 3;
+    PluginActiveStatus plugin_active_status = 4;
 }
 
 enum PluginRunningStatus{
-    Stopped=0;
-    Inited=1;
-    Running=2;
-    WithError=3;
+    Stopped = 0;
+    Inited = 1;
+    Running = 2;
+    WithError = 3;
 }
 
 enum PluginInstallableStatus{
-    NonInstallable=0;
-    Installable=1;
+    NonInstallable = 0;
+    Installable = 1;
 }
 
 enum PluginActiveStatus {
-    InActive=0;
-    Active=1;
+    InActive = 0;
+    Active = 1;
 }
 
 
 // cmd: plugin get
 message PluginGetRequest {
-    Id id=1;
-    bool flag_verbose=2;
+    ID id = 1;
+    bool flag_verbose = 2;
 }
 
 // cmd: plugin install
 message PluginInstallRequest {
-    Id id=1;
-    bool flag_verbose=2;
-    bool flag_deps=3;
-    bool flag_all=4;
+    ID id = 1;
+    bool flag_verbose = 2;
+    bool flag_deps = 3;
+    bool flag_all = 4;
 }
 //cmd plugin interface
 message PluginInterfaceRequest{
-    string interface_name=1;
+    string interface_name = 1;
 }
 
 // cmd: plugin list
 message PluginListRequest{
-    bool flag_all=1;
-    bool flag_error=2;
+    bool flag_all = 1;
+    bool flag_error = 2;
     bool flag_installed = 3;
     bool flag_running = 4;
-    bool flag_installable=5;
-    bool flag_inactive=6;
+    bool flag_installable = 5;
+    bool flag_inactive = 6;
 }
 // response for plugin list and plugin interface
 message PluginListReply{
@@ -66,43 +66,43 @@ message PluginListReply{
 
 // cmd: plugin meta
 message PluginMetaRequest {
-    Id id = 1;
+    ID id = 1;
     bool flag_deps = 2;
-    bool flag_deps_status=3;
+    bool flag_deps_status = 3;
     bool flag_dependent = 4;
-    bool flag_dependent_status=5;
+    bool flag_dependent_status = 5;
 }
 
 message PluginMetaReply {
-    repeated Meta meta=1;
+    repeated Meta meta = 1;
 }
 
 //cmd: plugin pull
 message PluginPullRequest {
-    Id id=1;
-    bool flag_deps=2;
+    ID id = 1;
+    bool flag_deps = 2;
 }
 
 // cmd: plugin remove
 message PluginRemoveRequest {
-    Id id=1;
+    ID id = 1;
 }
 
 message PluginStartRequest{
-    Id id=1;
-    bool flag_all=2;
+    ID id = 1;
+    bool flag_all = 2;
 }
 
 message PluginStopRequest{
-    Id id=1;
-    bool flag_all=2;
+    ID id = 1;
+    bool flag_all = 2;
 }
 
 // cmd: plugin uninstall
 message PluginUninstallRequest {
-    Id id=1;
-    bool flag_all=2;
-    bool flag_dependent=3;
+    ID id = 1;
+    bool flag_all = 2;
+    bool flag_dependent = 3;
 }
 
 // cmd: plugin upload

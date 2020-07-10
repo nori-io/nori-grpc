@@ -3,9 +3,9 @@ syntax = "proto3";
 package proto;
 option go_package = "pkg/proto";
 
-message Id {
+message ID {
     string id = 1;
-    string version=2;
+    string version = 2;
 }
 
 message Error {

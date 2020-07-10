@@ -6,31 +6,21 @@ option go_package = "pkg/proto";
 import "common.proto";
 
 message Meta{
-    Id id = 1;
+    ID id = 1;
     Author author = 2;
     repeated Dependency dependencies = 3;
     Description description = 4;
     Core core = 5;
     string interface = 6;
-    License license = 7;
+    repeated License licenses = 7;
     repeated Link links = 8;
     Repository repository = 9;
     repeated string tags = 10;
 }
 
-
-
 message Author {
     string name = 1;
     string uri = 2;
-}
-
-message Dependencies {
-    repeated Dependency meta_dependency = 1;
-}
-
-message PluginID {
-    string meta_id = 1;
 }
 
 message Dependency {
@@ -41,11 +31,6 @@ message Dependency {
 message Description {
     string name = 1;
     string description = 2;
-}
-
-message PluginDependency{
-    string id = 1;
-    string version = 2;
 }
 
 message Core {
