@@ -8,28 +8,17 @@ import "meta.proto";
 
 message Plugin {
     Meta meta = 1;
-    PluginRunningStatus plugin_running_status = 2;
-    PluginInstallableStatus plugin_installable_status = 3;
-    PluginActiveStatus plugin_active_status = 4;
+    bool is_active = 2;
+    bool is_installable = 3;
+    Status status = 4;
 }
 
-enum PluginRunningStatus{
+enum Status {
     Stopped = 0;
     Inited = 1;
     Running = 2;
     WithError = 3;
 }
-
-enum PluginInstallableStatus{
-    NonInstallable = 0;
-    Installable = 1;
-}
-
-enum PluginActiveStatus {
-    InActive = 0;
-    Active = 1;
-}
-
 
 // cmd: plugin get
 message PluginGetRequest {
@@ -41,8 +30,7 @@ message PluginGetRequest {
 message PluginInstallRequest {
     ID id = 1;
     bool flag_verbose = 2;
-    bool flag_deps = 3;
-    bool flag_all = 4;
+    bool flag_all = 3;
 }
 //cmd plugin interface
 message PluginInterfaceRequest{
@@ -80,7 +68,6 @@ message PluginMetaReply {
 //cmd: plugin pull
 message PluginPullRequest {
     ID id = 1;
-    bool flag_deps = 2;
 }
 
 // cmd: plugin remove
@@ -106,7 +93,7 @@ message PluginUninstallRequest {
 }
 
 // cmd: plugin upload
-message PluginUploadRequest {
-    string filepath = 1;
+message PluginUploadChunk {
+    bytes Chunk = 1;
 }
 

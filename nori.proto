@@ -19,7 +19,7 @@ service Nori {
     rpc PluginStartCommand (PluginStartRequest)returns (Error){}
     rpc PluginStopCommand (PluginStopRequest)returns (Error){}
     rpc PluginUninstallCommand (PluginUninstallRequest) returns (Error) {}
-    rpc PluginUploadCommand (PluginUploadRequest) returns (Error) {}
+    rpc PluginUploadCommand (stream PluginUploadChunk) returns (Error) {}
 
     //config
     rpc ConfigGetCommand(ConfigGetRequest)returns (ConfigGetReply){}
