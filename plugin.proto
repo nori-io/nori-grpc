@@ -32,9 +32,10 @@ message PluginInstallRequest {
     bool flag_verbose = 2;
     bool flag_all = 3;
 }
+
 //cmd plugin interface
 message PluginInterfaceRequest{
-    string interface_name = 1;
+    string interface = 1;
 }
 
 // cmd: plugin list
@@ -46,11 +47,6 @@ message PluginListRequest{
     bool flag_installable = 5;
     bool flag_inactive = 6;
 }
-// response for plugin list and plugin interface
-message PluginListReply{
-    repeated Plugin plugin = 1;
-    Error error = 2;
-}
 
 // cmd: plugin meta
 message PluginMetaRequest {
@@ -59,10 +55,6 @@ message PluginMetaRequest {
     bool flag_deps_status = 3;
     bool flag_dependent = 4;
     bool flag_dependent_status = 5;
-}
-
-message PluginMetaReply {
-    repeated Meta meta = 1;
 }
 
 //cmd: plugin pull
@@ -75,11 +67,13 @@ message PluginRemoveRequest {
     ID id = 1;
 }
 
+// cmd: plugin start
 message PluginStartRequest{
     ID id = 1;
     bool flag_all = 2;
 }
 
+// cmd: plugin stop
 message PluginStopRequest{
     ID id = 1;
     bool flag_all = 2;
@@ -94,6 +88,18 @@ message PluginUninstallRequest {
 
 // cmd: plugin upload
 message PluginUploadChunk {
-    bytes Chunk = 1;
+    bytes chunk = 1;
+}
+
+// response: plugin meta
+message PluginMetaReply {
+    repeated Meta meta = 1;
+    Error error = 2;
+}
+
+// response: plugin list
+message PluginListReply{
+    repeated Plugin plugin = 1;
+    Error error = 2;
 }
 

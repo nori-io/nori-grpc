@@ -4,7 +4,7 @@ package proto;
 option go_package = "pkg/proto";
 
 message ID {
-    string id = 1;
+    string plugin_id = 1;
     string version = 2;
 }
 

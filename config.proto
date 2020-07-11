@@ -20,13 +20,14 @@ message ConfigSetRequest{
     string key = 2;
     string value = 3;
 }
+
 message ConfigSetReply{
     Error error = 1;
 }
 
 // cmd: config upload
 message ConfigUploadRequest{
-    string path = 1;
+    bytes config = 1;
 }
 
 message ConfigUploadReply{
