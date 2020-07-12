@@ -1,116 +1,105 @@
 syntax = "proto3";
 
-package plugin;
+package proto;
+option go_package = "pkg/proto";
 
 import "common.proto";
-import "plugin_meta_information.proto";
+import "meta.proto";
+
+message Plugin {
+    Meta meta = 1;
+    bool is_active = 2;
+    bool is_installable = 3;
+    Status status = 4;
+}
+
+enum Status {
+    Stopped = 0;
+    Inited = 1;
+    Running = 2;
+    WithError = 3;
+}
 
 // cmd: plugin get
 message PluginGetRequest {
-    common.ID Id=1;
-    bool FlagVerbose=2;
-}
-
-message PluginPullRequest {
-    common.ID Id=1;
-    bool FlagDeps=2;
+    ID id = 1;
+    bool flag_verbose = 2;
 }
 
 // cmd: plugin install
 message PluginInstallRequest {
-    common.ID Id=1;
-    bool FlagVerbose=2;
-    bool FlagDeps=3;
-    bool FlagAll=4;
+    ID id = 1;
+    bool flag_verbose = 2;
+    bool flag_all = 3;
 }
 
+//cmd plugin interface
 message PluginInterfaceRequest{
-    string InterfaceName=1;
+    string interface = 1;
 }
 
 // cmd: plugin list
 message PluginListRequest{
-    bool FlagAll=1;
-    bool FlagError=2;
-    bool FlagInstalled = 3;
-    bool FlagRunning = 4;
-    bool FlagInstallable=5;
-    bool FlagInactive=6;
-}
-
-message PluginListWithStatus {
-    common.ID metaID = 1;
-    Author Author = 2;
-    Dependencies DependenciesArray = 3;
-    Description Description = 4;
-    Core Core = 5;
-    Interface Interface = 6;
-    License License = 7;
-    Links Links = 8;
-    Repository Repository = 9;
-    repeated string Tags = 10;
-    bool FlagAll=11;
-    bool FlagError=12;
-    bool FlagInstalled = 13;
-    bool FlagRunning = 14;
-    bool FlagInstallable=15;
-    bool FlagInactive=16;
-}
-
-message PluginListWithoutStatus{
-    common.ID metaID = 1;
-    Author Author = 2;
-    Dependencies DependenciesArray = 3;
-    Description Description = 4;
-    Core Core = 5;
-    Interface Interface = 6;
-    License License = 7;
-    Links Links = 8;
-    Repository Repository = 9;
-    repeated string Tags = 10;
-}
-
-message PluginListReply{
-    repeated PluginListWithStatus Data = 1;
-    common.ErrorReply ErrorPlugin = 2;
-}
-
-// cmd: plugin remove
-message PluginRemoveRequest {
-    common.ID Id=1;
-}
-
-message PluginStartRequest{
-    common.ID Id=1;
-    bool FlagAll=2;
-}
-
-message PluginStopRequest{
-    common.ID Id=1;
-    bool FlagAll=2;
-}
-
-// cmd: plugin uninstall
-message PluginUninstallRequest {
-    common.ID Id=1;
-    bool FlagAll=2;
-    bool FlagDependent=3;
-}
-
-// cmd: plugin upload
-message PluginUploadRequest {
-    string Filepath = 1;
+    bool flag_all = 1;
+    bool flag_error = 2;
+    bool flag_installed = 3;
+    bool flag_running = 4;
+    bool flag_installable = 5;
+    bool flag_inactive = 6;
 }
 
 // cmd: plugin meta
 message PluginMetaRequest {
-    PluginID ID = 1;
-    bool FlagDeps = 2;
-    bool FlagDepsStatus=3;
-    bool FlagDependent = 4;
-    bool FlagDependentStatus=5;
+    ID id = 1;
+    bool flag_deps = 2;
+    bool flag_deps_status = 3;
+    bool flag_dependent = 4;
+    bool flag_dependent_status = 5;
 }
 
-message PluginMetaReply {
-    repeated PluginListWithoutStatus arrayPluginListWithoutStatus=1;
+//cmd: plugin pull
+message PluginPullRequest {
+    ID id = 1;
 }
+
+// cmd: plugin remove
+message PluginRemoveRequest {
+    ID id = 1;
+}
+
+// cmd: plugin start
+message PluginStartRequest{
+    ID id = 1;
+    bool flag_all = 2;
+}
+
+// cmd: plugin stop
+message PluginStopRequest{
+    ID id = 1;
+    bool flag_all = 2;
+}
+
+// cmd: plugin uninstall
+message PluginUninstallRequest {
+    ID id = 1;
+    bool flag_all = 2;
+    bool flag_dependent = 3;
+}
+
+// cmd: plugin upload
+message PluginUploadChunk {
+    bytes chunk = 1;
+}
+
+// response: plugin meta
+message PluginMetaReply {
+    repeated Meta meta = 1;
+    Error error = 2;
+}
+
+// response: plugin list
+message PluginListReply{
+    repeated Plugin plugin = 1;
+    Error error = 2;
+}
+

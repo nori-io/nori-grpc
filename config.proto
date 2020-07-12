@@ -5,34 +5,32 @@ option go_package = "pkg/proto";
 
 import "common.proto";
 
-//config get
+// cmd: config get
 message ConfigGetRequest{
-    ID Id=1;
+    ID id = 1;
 }
 
 message ConfigGetReply{
-    KeyValue KeyValueMapField=1;
+    map<string, string> map = 1;
 }
 
-//config set
+// cmd: config set
 message ConfigSetRequest{
-    ID Id=1;
-    string Key=2;
-    string Value=3;
-}
-message ConfigSetReply{
-    ErrorReply ErrorConfig=1;
+    ID id = 1;
+    string key = 2;
+    string value = 3;
 }
 
-//config upload
+message ConfigSetReply{
+    Error error = 1;
+}
+
+// cmd: config upload
 message ConfigUploadRequest{
-    string Path=1;
+    bytes config = 1;
 }
 
 message ConfigUploadReply{
-    KeyValue KeyValueMapField=1;
+    map<string, string> map = 1;
 }
 
-message KeyValue {
-    map<string, string> KeyValueMap  = 1;
-}
