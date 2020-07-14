@@ -40,12 +40,11 @@ message PluginInterfaceRequest{
 
 // cmd: plugin list
 message PluginListRequest{
-    bool flag_all = 1;
-    bool flag_error = 2;
+    bool flag_error = 1;
+    bool flag_installable = 2;
     bool flag_installed = 3;
     bool flag_running = 4;
-    bool flag_installable = 5;
-    bool flag_inactive = 6;
+    bool flag_stopped = 5;
 }
 
 // cmd: plugin meta
