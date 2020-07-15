@@ -92,7 +92,7 @@ message PluginUploadChunk {
 
 // response: plugin meta
 message PluginMetaReply {
-    repeated Meta meta = 1;
+    Meta meta = 1;
     Error error = 2;
 }
 
