@@ -9,13 +9,15 @@ import "plugin.proto";
 
 service Nori {
     //plugin
-    rpc PluginGetCommand (PluginGetRequest) returns (Error) {}
+    rpc PluginEnable (PluginRequest) returns (Error) {}
+    rpc PluginDisable (PluginRequest) returns (Error) {}
+    rpc PluginGetCommand (PluginRequest) returns (Error) {}
     rpc PluginInstallCommand (PluginInstallRequest) returns (Error) {}
     rpc PluginInterfaceCommand(PluginInterfaceRequest) returns (PluginListReply){}
     rpc PluginListCommand (PluginListRequest) returns (PluginListReply) {}
     rpc PluginMetaCommand (PluginMetaRequest) returns (PluginMetaReply) {}
-    rpc PluginPullCommand (PluginPullRequest) returns (Error) {}
-    rpc PluginRemoveCommand (PluginRemoveRequest) returns (Error) {}
+    rpc PluginPullCommand (PluginRequest) returns (Error) {}
+    rpc PluginRemoveCommand (PluginRequest) returns (Error) {}
     rpc PluginStartCommand (PluginStartRequest)returns (Error){}
     rpc PluginStopCommand (PluginStopRequest)returns (Error){}
     rpc PluginUninstallCommand (PluginUninstallRequest) returns (Error) {}

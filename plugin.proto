@@ -20,8 +20,8 @@ enum Status {
     WithError = 3;
 }
 
-// cmd: plugin get
-message PluginGetRequest {
+// cmd: plugin enable / disable / get / pull / remove
+message PluginRequest {
     ID id = 1;
     bool flag_verbose = 2;
 }
@@ -54,16 +54,6 @@ message PluginMetaRequest {
     bool flag_deps_status = 3;
     bool flag_dependent = 4;
     bool flag_dependent_status = 5;
-}
-
-//cmd: plugin pull
-message PluginPullRequest {
-    ID id = 1;
-}
-
-// cmd: plugin remove
-message PluginRemoveRequest {
-    ID id = 1;
 }
 
 // cmd: plugin start
