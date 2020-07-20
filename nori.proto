@@ -11,21 +11,21 @@ service Nori {
     //plugin
     rpc PluginEnable (PluginRequest) returns (Error) {}
     rpc PluginDisable (PluginRequest) returns (Error) {}
-    rpc PluginGetCommand (PluginRequest) returns (Error) {}
-    rpc PluginInstallCommand (PluginInstallRequest) returns (Error) {}
-    rpc PluginInterfaceCommand(PluginInterfaceRequest) returns (PluginListReply){}
-    rpc PluginListCommand (PluginListRequest) returns (PluginListReply) {}
-    rpc PluginMetaCommand (PluginMetaRequest) returns (PluginMetaReply) {}
-    rpc PluginPullCommand (PluginRequest) returns (Error) {}
-    rpc PluginRemoveCommand (PluginRequest) returns (Error) {}
-    rpc PluginStartCommand (PluginStartRequest)returns (Error){}
-    rpc PluginStopCommand (PluginStopRequest)returns (Error){}
-    rpc PluginUninstallCommand (PluginUninstallRequest) returns (Error) {}
-    rpc PluginUploadCommand (stream PluginUploadChunk) returns (Error) {}
+    rpc PluginGet (PluginRequest) returns (Error) {}
+    rpc PluginInstall (PluginInstallRequest) returns (Error) {}
+    rpc PluginInterface(PluginInterfaceRequest) returns (PluginListReply){}
+    rpc PluginList (PluginListRequest) returns (PluginListReply) {}
+    rpc PluginMeta (PluginMetaRequest) returns (PluginMetaReply) {}
+    rpc PluginPull (PluginRequest) returns (Error) {}
+    rpc PluginRemove (PluginRequest) returns (Error) {}
+    rpc PluginStart (PluginStartRequest)returns (Error){}
+    rpc PluginStop (PluginStopRequest)returns (Error){}
+    rpc PluginUninstall (PluginUninstallRequest) returns (Error) {}
+    rpc PluginUpload (stream PluginUploadChunk) returns (Error) {}
 
     //config
-    rpc ConfigGetCommand(ConfigGetRequest)returns (ConfigGetReply){}
-    rpc ConfigSetCommand(ConfigSetRequest) returns(ConfigSetReply){}
-    rpc ConfigUploadCommand(ConfigUploadRequest) returns(ConfigUploadReply){}
+    rpc ConfigGet(ConfigGetRequest)returns (ConfigGetReply){}
+    rpc ConfigSet(ConfigSetRequest) returns(ConfigSetReply){}
+    rpc ConfigUpload(ConfigUploadRequest) returns(ConfigUploadReply){}
 }
 
