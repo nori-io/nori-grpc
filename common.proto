@@ -12,3 +12,7 @@ message Error {
     string code = 1;
     string message = 2;
 }
+
+message Reply {
+    Error error = 1;
+}
