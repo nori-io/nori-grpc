@@ -9,17 +9,17 @@ import "plugin.proto";
 
 service Nori {
     //plugin
-    rpc PluginGetCommand (PluginGetRequest) returns (Error) {}
-    rpc PluginInstallCommand (PluginInstallRequest) returns (Error) {}
+    rpc PluginGetCommand (PluginGetRequest) returns (Reply) {}
+    rpc PluginInstallCommand (PluginInstallRequest) returns (Reply) {}
     rpc PluginInterfaceCommand(PluginInterfaceRequest) returns (PluginListReply){}
     rpc PluginListCommand (PluginListRequest) returns (PluginListReply) {}
     rpc PluginMetaCommand (PluginMetaRequest) returns (PluginMetaReply) {}
-    rpc PluginPullCommand (PluginPullRequest) returns (Error) {}
-    rpc PluginRemoveCommand (PluginRemoveRequest) returns (Error) {}
-    rpc PluginStartCommand (PluginStartRequest)returns (Error){}
-    rpc PluginStopCommand (PluginStopRequest)returns (Error){}
-    rpc PluginUninstallCommand (PluginUninstallRequest) returns (Error) {}
-    rpc PluginUploadCommand (stream PluginUploadChunk) returns (Error) {}
+    rpc PluginPullCommand (PluginPullRequest) returns (Reply) {}
+    rpc PluginRemoveCommand (PluginRemoveRequest) returns (Reply) {}
+    rpc PluginStartCommand (PluginStartRequest)returns (Reply){}
+    rpc PluginStopCommand (PluginStopRequest)returns (Reply){}
+    rpc PluginUninstallCommand (PluginUninstallRequest) returns (Reply) {}
+    rpc PluginUploadCommand (stream PluginUploadChunk) returns (Reply) {}
 
     //config
     rpc ConfigGetCommand(ConfigGetRequest)returns (ConfigGetReply){}
