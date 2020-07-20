@@ -9,19 +9,19 @@ import "plugin.proto";
 
 service Nori {
     //plugin
-    rpc PluginEnable (PluginRequest) returns (Error) {}
-    rpc PluginDisable (PluginRequest) returns (Error) {}
-    rpc PluginGet (PluginRequest) returns (Error) {}
-    rpc PluginInstall (PluginInstallRequest) returns (Error) {}
+    rpc PluginEnable (PluginRequest) returns (Reply) {}
+    rpc PluginDisable (PluginRequest) returns (Reply) {}
+    rpc PluginGet (PluginRequest) returns (Reply) {}
+    rpc PluginInstall (PluginInstallRequest) returns (Reply) {}
     rpc PluginInterface(PluginInterfaceRequest) returns (PluginListReply){}
     rpc PluginList (PluginListRequest) returns (PluginListReply) {}
     rpc PluginMeta (PluginMetaRequest) returns (PluginMetaReply) {}
-    rpc PluginPull (PluginRequest) returns (Error) {}
-    rpc PluginRemove (PluginRequest) returns (Error) {}
-    rpc PluginStart (PluginStartRequest)returns (Error){}
-    rpc PluginStop (PluginStopRequest)returns (Error){}
-    rpc PluginUninstall (PluginUninstallRequest) returns (Error) {}
-    rpc PluginUpload (stream PluginUploadChunk) returns (Error) {}
+    rpc PluginPull (PluginRequest) returns (Reply) {}
+    rpc PluginRemove (PluginRequest) returns (Reply) {}
+    rpc PluginStart (PluginStartRequest)returns (Reply){}
+    rpc PluginStop (PluginStopRequest)returns (Reply){}
+    rpc PluginUninstall (PluginUninstallRequest) returns (Reply) {}
+    rpc PluginUpload (stream PluginUploadChunk) returns (Reply) {}
 
     //config
     rpc ConfigGet(ConfigGetRequest)returns (ConfigGetReply){}
