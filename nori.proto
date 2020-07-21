@@ -8,23 +8,24 @@ import "config.proto";
 import "plugin.proto";
 
 service Nori {
-
     //plugin
-    rpc PluginGetCommand (PluginGetRequest) returns (ErrorReply) {}
-    rpc PluginInstallCommand (PluginInstallRequest) returns (ErrorReply) {}
-    rpc PluginInterfaceCommand(PluginInterfaceRequest) returns (PluginListReply){}
-    rpc PluginListCommand (PluginListRequest) returns (PluginListReply) {}
-    rpc PluginMetaCommand (PluginMetaRequest) returns (PluginMetaReply) {}
-    rpc PluginPullCommand (PluginPullRequest) returns (ErrorReply) {}
-    rpc PluginRemoveCommand (PluginRemoveRequest) returns (ErrorReply) {}
-    rpc PluginStartCommand (PluginStartRequest)returns (ErrorReply){}
-    rpc PluginStopCommand (PluginStopRequest)returns (ErrorReply){}
-    rpc PluginUninstallCommand (PluginUninstallRequest) returns (ErrorReply) {}
-    rpc PluginUploadCommand (PluginUploadRequest) returns (ErrorReply) {}
+    rpc PluginEnable (PluginRequest) returns (Reply) {}
+    rpc PluginDisable (PluginRequest) returns (Reply) {}
+    rpc PluginGet (PluginRequest) returns (Reply) {}
+    rpc PluginInstall (PluginInstallRequest) returns (Reply) {}
+    rpc PluginInterface(PluginInterfaceRequest) returns (PluginListReply){}
+    rpc PluginList (PluginListRequest) returns (PluginListReply) {}
+    rpc PluginMeta (PluginMetaRequest) returns (PluginMetaReply) {}
+    rpc PluginPull (PluginRequest) returns (Reply) {}
+    rpc PluginRemove (PluginRequest) returns (Reply) {}
+    rpc PluginStart (PluginStartRequest)returns (Reply){}
+    rpc PluginStop (PluginStopRequest)returns (Reply){}
+    rpc PluginUninstall (PluginUninstallRequest) returns (Reply) {}
+    rpc PluginUpload (stream PluginUploadChunk) returns (Reply) {}
 
     //config
-    rpc ConfigGetCommand(ConfigGetRequest)returns (ConfigGetReply){}
-    rpc ConfigSetCommand(ConfigSetRequest) returns(ConfigSetReply){}
-    rpc ConfigUploadCommand(ConfigUploadRequest) returns(ConfigUploadReply){}
+    rpc ConfigGet(ConfigGetRequest)returns (ConfigGetReply){}
+    rpc ConfigSet(ConfigSetRequest) returns(ConfigSetReply){}
+    rpc ConfigUpload(ConfigUploadRequest) returns(ConfigUploadReply){}
 }
 

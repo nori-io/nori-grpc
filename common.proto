@@ -4,11 +4,15 @@ package proto;
 option go_package = "pkg/proto";
 
 message ID {
-    string Id = 1;
-    string Version=2;
+    string plugin_id = 1;
+    string version = 2;
 }
 
-message ErrorReply {
-    bool Status = 1;
-    string Error = 2;
+message Error {
+    string code = 1;
+    string message = 2;
+}
+
+message Reply {
+    Error error = 1;
 }
