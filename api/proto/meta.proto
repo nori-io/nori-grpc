@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "pkg/api/proto";
+
+import "common.proto";
+
+message Meta{
+    ID id = 1;
+    Author author = 2;
+    repeated Dependency dependencies = 3;
+    Description description = 4;
+    Core core = 5;
+    string interface = 6;
+    repeated License licenses = 7;
+    repeated Link links = 8;
+    Repository repository = 9;
+    repeated string tags = 10;
+}
+
+message Author {
+    string name = 1;
+    string uri = 2;
+}
+
+message Dependency {
+    string constraint = 1;
+    string interface = 2;
+}
+
+message Description {
+    string name = 1;
+    string description = 2;
+}
+
+message Core {
+    string version_constraint = 1;
+}
+
+message License {
+    string title = 1;
+    string type = 2;
+    string uri = 3;
+}
+
+message Link {
+    string title = 1;
+    string url = 2;
+}
+
+message Repository {
+    string type = 1;
+    string uri = 2;
+}
