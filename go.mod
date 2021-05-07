@@ -1,4 +1,4 @@
-module github.com/nori-io/nori-api
+module github.com/nori-io/nori-grpc
 
 go 1.16
 
