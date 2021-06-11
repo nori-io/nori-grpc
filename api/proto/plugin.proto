@@ -28,7 +28,7 @@ message PluginRequest {
 
 // cmd: plugin pull
 message PluginPullRequest {
-    string pluginID_URL= 1;
+    string pluginIDorURL= 1;
     bool flag_verbose = 2;
 }
 
