@@ -20,7 +20,7 @@ enum Status {
     WithError = 3;
 }
 
-// cmd: plugin enable / disable / get / pull / remove
+// cmd: plugin enable / disable / get / remove
 message PluginRequest {
     ID id = 1;
     bool flag_verbose = 2;
