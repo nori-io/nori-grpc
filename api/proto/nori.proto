@@ -3,9 +3,9 @@ syntax = "proto3";
 package proto;
 option go_package = "pkg/api/proto";
 
-import "common.proto";
-import "config.proto";
-import "plugin.proto";
+import "api/proto/common.proto";
+import "api/proto/config.proto";
+import "api/proto/plugin.proto";
 
 service Nori {
     //plugin
@@ -16,7 +16,7 @@ service Nori {
     rpc PluginInterface(PluginInterfaceRequest) returns (PluginListReply){}
     rpc PluginList (PluginListRequest) returns (PluginListReply) {}
     rpc PluginMeta (PluginMetaRequest) returns (PluginMetaReply) {}
-    rpc PluginPull (PluginRequest) returns (Reply) {}
+    rpc PluginPull (PluginPullRequest) returns (Reply) {}
     rpc PluginRemove (PluginRequest) returns (Reply) {}
     rpc PluginStart (PluginStartRequest)returns (Reply){}
     rpc PluginStop (PluginStopRequest)returns (Reply){}

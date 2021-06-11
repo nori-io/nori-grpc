@@ -3,7 +3,7 @@ syntax = "proto3";
 package proto;
 option go_package = "pkg/api/proto";
 
-import "common.proto";
+import "api/proto/common.proto";
 import "meta.proto";
 
 message Plugin {
@@ -23,6 +23,12 @@ enum Status {
 // cmd: plugin enable / disable / get / pull / remove
 message PluginRequest {
     ID id = 1;
+    bool flag_verbose = 2;
+}
+
+// cmd: plugin pull
+message PluginPullRequest {
+    string pluginID_URL= 1;
     bool flag_verbose = 2;
 }
 
