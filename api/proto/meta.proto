@@ -3,7 +3,7 @@ syntax = "proto3";
 package proto;
 option go_package = "pkg/api/proto";
 
-import "api/proto/common.proto";
+import "common.proto";
 
 message Meta{
     ID id = 1;

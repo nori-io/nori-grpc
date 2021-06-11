@@ -3,8 +3,8 @@ syntax = "proto3";
 package proto;
 option go_package = "pkg/api/proto";
 
-import "api/proto/common.proto";
-import "api/proto/meta.proto";
+import "common.proto";
+import "meta.proto";
 
 message Plugin {
     Meta meta = 1;
