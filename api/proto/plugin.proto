@@ -82,8 +82,11 @@ message PluginUninstallRequest {
 }
 
 // cmd: plugin upload
-message PluginUploadChunk {
-    bytes chunk = 1;
+message PluginUploadRequest {
+    oneof data {
+        string name = 1;
+        bytes chunk = 2;
+    };
 }
 
 // response: plugin meta

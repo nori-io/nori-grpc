@@ -164,7 +164,7 @@ func (c *noriClient) PluginUpload(ctx context.Context, opts ...grpc.CallOption) 
 }
 
 type Nori_PluginUploadClient interface {
-	Send(*PluginUploadChunk) error
+	Send(*PluginUploadRequest) error
 	CloseAndRecv() (*Reply, error)
 	grpc.ClientStream
 }
@@ -173,7 +173,7 @@ type noriPluginUploadClient struct {
 	grpc.ClientStream
 }
 
-func (x *noriPluginUploadClient) Send(m *PluginUploadChunk) error {
+func (x *noriPluginUploadClient) Send(m *PluginUploadRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
@@ -527,7 +527,7 @@ func _Nori_PluginUpload_Handler(srv interface{}, stream grpc.ServerStream) error
 
 type Nori_PluginUploadServer interface {
 	SendAndClose(*Reply) error
-	Recv() (*PluginUploadChunk, error)
+	Recv() (*PluginUploadRequest, error)
 	grpc.ServerStream
 }
 
@@ -539,8 +539,8 @@ func (x *noriPluginUploadServer) SendAndClose(m *Reply) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *noriPluginUploadServer) Recv() (*PluginUploadChunk, error) {
-	m := new(PluginUploadChunk)
+func (x *noriPluginUploadServer) Recv() (*PluginUploadRequest, error) {
+	m := new(PluginUploadRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
