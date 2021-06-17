@@ -20,9 +20,15 @@ enum Status {
     WithError = 3;
 }
 
-// cmd: plugin enable / disable / get / pull / remove
+// cmd: plugin enable / disable / get / remove
 message PluginRequest {
     ID id = 1;
+    bool flag_verbose = 2;
+}
+
+// cmd: plugin pull
+message PluginPullRequest {
+    string pluginIDorURL= 1;
     bool flag_verbose = 2;
 }
 
@@ -76,8 +82,11 @@ message PluginUninstallRequest {
 }
 
 // cmd: plugin upload
-message PluginUploadChunk {
-    bytes chunk = 1;
+message PluginUploadRequest {
+    oneof data {
+        string name = 1;
+        bytes chunk = 2;
+    };
 }
 
 // response: plugin meta

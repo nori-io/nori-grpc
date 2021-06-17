@@ -16,12 +16,12 @@ service Nori {
     rpc PluginInterface(PluginInterfaceRequest) returns (PluginListReply){}
     rpc PluginList (PluginListRequest) returns (PluginListReply) {}
     rpc PluginMeta (PluginMetaRequest) returns (PluginMetaReply) {}
-    rpc PluginPull (PluginRequest) returns (Reply) {}
+    rpc PluginPull (PluginPullRequest) returns (Reply) {}
     rpc PluginRemove (PluginRequest) returns (Reply) {}
     rpc PluginStart (PluginStartRequest)returns (Reply){}
     rpc PluginStop (PluginStopRequest)returns (Reply){}
     rpc PluginUninstall (PluginUninstallRequest) returns (Reply) {}
-    rpc PluginUpload (stream PluginUploadChunk) returns (Reply) {}
+    rpc PluginUpload (stream PluginUploadRequest) returns (Reply) {}
 
     //config
     rpc ConfigGet(ConfigGetRequest)returns (ConfigGetReply){}
