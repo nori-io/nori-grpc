@@ -19,8 +19,9 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NoriClient interface {
 	//plugin
-	PluginEnable(ctx context.Context, in *PluginRequest, opts ...grpc.CallOption) (*Reply, error)
 	PluginDisable(ctx context.Context, in *PluginRequest, opts ...grpc.CallOption) (*Reply, error)
+	PluginDownload(ctx context.Context, in *PluginDownloadRequest, opts ...grpc.CallOption) (Nori_PluginDownloadClient, error)
+	PluginEnable(ctx context.Context, in *PluginRequest, opts ...grpc.CallOption) (*Reply, error)
 	PluginGet(ctx context.Context, in *PluginRequest, opts ...grpc.CallOption) (*Reply, error)
 	PluginInstall(ctx context.Context, in *PluginInstallRequest, opts ...grpc.CallOption) (*Reply, error)
 	PluginInterface(ctx context.Context, in *PluginInterfaceRequest, opts ...grpc.CallOption) (*PluginListReply, error)
@@ -46,18 +47,50 @@ func NewNoriClient(cc grpc.ClientConnInterface) NoriClient {
 	return &noriClient{cc}
 }
 
-func (c *noriClient) PluginEnable(ctx context.Context, in *PluginRequest, opts ...grpc.CallOption) (*Reply, error) {
+func (c *noriClient) PluginDisable(ctx context.Context, in *PluginRequest, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/proto.Nori/PluginEnable", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.Nori/PluginDisable", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *noriClient) PluginDisable(ctx context.Context, in *PluginRequest, opts ...grpc.CallOption) (*Reply, error) {
+func (c *noriClient) PluginDownload(ctx context.Context, in *PluginDownloadRequest, opts ...grpc.CallOption) (Nori_PluginDownloadClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Nori_ServiceDesc.Streams[0], "/proto.Nori/PluginDownload", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &noriPluginDownloadClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Nori_PluginDownloadClient interface {
+	Recv() (*PluginDownloadReply, error)
+	grpc.ClientStream
+}
+
+type noriPluginDownloadClient struct {
+	grpc.ClientStream
+}
+
+func (x *noriPluginDownloadClient) Recv() (*PluginDownloadReply, error) {
+	m := new(PluginDownloadReply)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *noriClient) PluginEnable(ctx context.Context, in *PluginRequest, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/proto.Nori/PluginDisable", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.Nori/PluginEnable", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +188,7 @@ func (c *noriClient) PluginUninstall(ctx context.Context, in *PluginUninstallReq
 }
 
 func (c *noriClient) PluginUpload(ctx context.Context, opts ...grpc.CallOption) (Nori_PluginUploadClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Nori_ServiceDesc.Streams[0], "/proto.Nori/PluginUpload", opts...)
+	stream, err := c.cc.NewStream(ctx, &Nori_ServiceDesc.Streams[1], "/proto.Nori/PluginUpload", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -220,8 +253,9 @@ func (c *noriClient) ConfigUpload(ctx context.Context, in *ConfigUploadRequest, 
 // for forward compatibility
 type NoriServer interface {
 	//plugin
-	PluginEnable(context.Context, *PluginRequest) (*Reply, error)
 	PluginDisable(context.Context, *PluginRequest) (*Reply, error)
+	PluginDownload(*PluginDownloadRequest, Nori_PluginDownloadServer) error
+	PluginEnable(context.Context, *PluginRequest) (*Reply, error)
 	PluginGet(context.Context, *PluginRequest) (*Reply, error)
 	PluginInstall(context.Context, *PluginInstallRequest) (*Reply, error)
 	PluginInterface(context.Context, *PluginInterfaceRequest) (*PluginListReply, error)
@@ -244,11 +278,14 @@ type NoriServer interface {
 type UnimplementedNoriServer struct {
 }
 
-func (UnimplementedNoriServer) PluginEnable(context.Context, *PluginRequest) (*Reply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PluginEnable not implemented")
-}
 func (UnimplementedNoriServer) PluginDisable(context.Context, *PluginRequest) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PluginDisable not implemented")
+}
+func (UnimplementedNoriServer) PluginDownload(*PluginDownloadRequest, Nori_PluginDownloadServer) error {
+	return status.Errorf(codes.Unimplemented, "method PluginDownload not implemented")
+}
+func (UnimplementedNoriServer) PluginEnable(context.Context, *PluginRequest) (*Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PluginEnable not implemented")
 }
 func (UnimplementedNoriServer) PluginGet(context.Context, *PluginRequest) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PluginGet not implemented")
@@ -305,24 +342,6 @@ func RegisterNoriServer(s grpc.ServiceRegistrar, srv NoriServer) {
 	s.RegisterService(&Nori_ServiceDesc, srv)
 }
 
-func _Nori_PluginEnable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PluginRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NoriServer).PluginEnable(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.Nori/PluginEnable",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NoriServer).PluginEnable(ctx, req.(*PluginRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Nori_PluginDisable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PluginRequest)
 	if err := dec(in); err != nil {
@@ -337,6 +356,45 @@ func _Nori_PluginDisable_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NoriServer).PluginDisable(ctx, req.(*PluginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nori_PluginDownload_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(PluginDownloadRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(NoriServer).PluginDownload(m, &noriPluginDownloadServer{stream})
+}
+
+type Nori_PluginDownloadServer interface {
+	Send(*PluginDownloadReply) error
+	grpc.ServerStream
+}
+
+type noriPluginDownloadServer struct {
+	grpc.ServerStream
+}
+
+func (x *noriPluginDownloadServer) Send(m *PluginDownloadReply) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Nori_PluginEnable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PluginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoriServer).PluginEnable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.Nori/PluginEnable",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoriServer).PluginEnable(ctx, req.(*PluginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -609,12 +667,12 @@ var Nori_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NoriServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "PluginEnable",
-			Handler:    _Nori_PluginEnable_Handler,
-		},
-		{
 			MethodName: "PluginDisable",
 			Handler:    _Nori_PluginDisable_Handler,
+		},
+		{
+			MethodName: "PluginEnable",
+			Handler:    _Nori_PluginEnable_Handler,
 		},
 		{
 			MethodName: "PluginGet",
@@ -670,6 +728,11 @@ var Nori_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "PluginDownload",
+			Handler:       _Nori_PluginDownload_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "PluginUpload",
 			Handler:       _Nori_PluginUpload_Handler,
