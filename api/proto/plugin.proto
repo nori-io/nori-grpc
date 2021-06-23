@@ -26,6 +26,14 @@ message PluginRequest {
     bool flag_verbose = 2;
 }
 
+//cmd: plugin download
+message PluginDownloadRequest {
+    ID pluginID = 1;
+}
+message PluginDownloadReply {
+    bytes chunk = 1;
+}
+
 // cmd: plugin pull
 message PluginPullRequest {
     string pluginIDorURL= 1;
